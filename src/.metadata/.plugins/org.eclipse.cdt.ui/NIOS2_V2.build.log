@@ -1,0 +1,9 @@
+17:13:13 **** Incremental Build of configuration Nios II for project NIOS2_V2 ****
+wsl make all 
+Info: Building /mnt/c/Users/admin-cac/Desktop/trabalho/software/NIOS2_V2_bsp/
+make --no-print-directory -C /mnt/c/Users/admin-cac/Desktop/trabalho/software/NIOS2_V2_bsp/
+[BSP build complete]
+[NIOS2_V2 build complete]
+
+17:13:14 Build Finished (took 903ms)
+

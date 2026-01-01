@@ -1,0 +1,6 @@
+14:03:18 **** Clean-only build of configuration Nios II for project Nios2_software ****
+wsl make clean 
+[Nios2_software clean complete]
+
+14:03:19 Build Finished (took 304ms)
+

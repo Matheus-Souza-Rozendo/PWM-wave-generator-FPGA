@@ -1,0 +1,43 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity sistema is
+    port (
+        CLOCK_50 : in  std_logic;
+        KEY      : in  std_logic_vector(3 downto 0);
+        GPIO    : out std_logic_vector(35 downto 0)
+    );
+end entity sistema;
+
+architecture behavior of sistema is
+
+
+    component gerador_PWM is
+        port (
+            D      : in  std_logic_vector(15 downto 0);  
+            max    : in  std_logic_vector(15 downto 0);  
+            clk_in : in  std_logic;
+            reset  : in  std_logic;
+            div    : in  std_logic_vector(2 downto 0);   
+            ypwm   : out std_logic
+        );
+    end component;
+
+    signal signal_D   : std_logic_vector(15 downto 0);
+    signal signal_max : std_logic_vector(15 downto 0);
+    signal signal_div : std_logic_vector(2 downto 0);
+
+begin
+
+    PW: gerador_PWM
+    port map (
+        D      => "0000011111101000",
+        max    => "0001001110001111",
+        clk_in => CLOCK_50,
+        reset  => KEY(0),
+        div    => "000",
+        ypwm   => GPIO(0)
+    );
+
+end architecture behavior;

@@ -1,0 +1,63 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity divisor_de_frequencia is
+    port(
+        clk_in  : in std_logic;
+        reset   : in std_logic;
+        div     : in std_logic_vector(2 downto 0);
+        clk_out : out std_logic
+    );
+end divisor_de_frequencia;
+
+-- Componente mux
+component mux is
+    port (
+        input : in std_logic_vector(7 downto 0);
+        sel   : in std_logic_vector(2 downto 0);
+        y     : out std_logic
+    );
+end component;
+
+-- Componente contador
+component contador is
+    generic(N : integer := 16);
+    port(
+        clk   : in std_logic;
+        reset : in std_logic;
+        max   : in std_logic_vector(N-1 downto 0);
+        y     : out std_logic_vector(N-1 downto 0)
+    );
+end component;
+
+architecture behavior of divisor_de_frequencia is
+
+    -- Corrigindo "Signal" para "signal" e corrigindo o nome do sinal
+    signal y_contador : std_logic_vector(6 downto 0); -- Corrigido nome de y_contadorl para y_contador
+    signal max        : std_logic_vector(6 downto 0) := "1111111";  -- max como valor binário
+
+begin
+    -- Instanciando o componente contador
+    C : contador
+        generic map (
+            N => 7
+        )
+        port map (
+            clk   => clk_in,
+            reset => reset,
+            max   => max,
+            y     => y_contador
+        );
+	
+	input_mux <= 
+
+    -- Instanciando o componente mux
+    M : mux
+        port map (
+            input => y_contador&clk_in,
+            sel   => div,
+            y     => clk_out
+        );
+
+end behavior;

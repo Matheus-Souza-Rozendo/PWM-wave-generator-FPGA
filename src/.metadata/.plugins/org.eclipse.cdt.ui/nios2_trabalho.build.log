@@ -1,0 +1,23 @@
+15:50:55 **** Incremental Build of configuration Nios II for project NIOS2_trabalho ****
+wsl make all 
+Info: Building /mnt/c/Users/admin-cac/Desktop/trabalho/software/NIOS2_trabalho_bsp/
+make --no-print-directory -C /mnt/c/Users/admin-cac/Desktop/trabalho/software/NIOS2_trabalho_bsp/
+Makefile not up to date.
+settings.bsp has been modified since the BSP Makefile was generated.
+
+Generate the BSP to update the Makefile, and then build again.
+
+To generate from Eclipse:
+ 1. Right-click the BSP project.
+ 2. In the Nios II Menu, click Generate BSP.
+
+To generate from the command line:
+ nios2-bsp-generate-files --settings=<settings file> --bsp-dir=<target bsp files directory>
+
+Makefile:546: recipe for target 'Makefile' failed
+make[1]: *** [Makefile] Error 1
+Makefile:842: recipe for target '/mnt/c/Users/admin-cac/Desktop/trabalho/software/NIOS2_trabalho_bsp/-recurs-make-lib' failed
+make: *** [/mnt/c/Users/admin-cac/Desktop/trabalho/software/NIOS2_trabalho_bsp/-recurs-make-lib] Error 2
+
+15:50:59 Build Finished (took 3s.940ms)
+

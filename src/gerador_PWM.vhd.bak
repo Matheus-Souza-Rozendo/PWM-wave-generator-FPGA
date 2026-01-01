@@ -1,0 +1,81 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity gerador_PWM is
+    port (
+        D      : in std_logic_vector(15 downto 0);  
+        max : in std_logic_vector(15 downto 0);  
+        clk_in,reset: in std_logic;
+        div:  in   std_logic_vector(2 downto 0);   
+        ypwm : out std_logic                   -- Resultado da comparação
+    );
+end Gerador_PWM;
+
+
+architecture behavior of gerador_PWM is
+
+-- Componente contador
+component contador is
+    generic(N : integer := 16);
+    port(
+        clk   : in std_logic;
+        reset : in std_logic;
+        max   : in std_logic_vector(N-1 downto 0);
+        y     : out std_logic_vector(N-1 downto 0)
+    );
+end component;
+
+-- Componente comparador
+component comparador is
+    port (
+        A      : in std_logic_vector(15 downto 0); 
+        B      : in std_logic_vector(15 downto 0); 
+        resultado : out std_logic           
+    );
+end component;
+
+-- Componente divisor_de_frequencia
+component divisor_de_frequencia is
+    port(
+        clk_in  : in std_logic;
+        reset   : in std_logic;
+        div     : in std_logic_vector(2 downto 0);
+        clk_out : out std_logic
+    );
+end component;
+
+    signal clock : std_logic;
+    signal y_contador : std_logic_vector(15 downto 0);
+
+begin
+    -- Instanciando o divisor de frequência
+    Div : divisor_de_frequencia
+        port map (
+            clk_in  => clk_in,
+            reset   => reset,
+            div     => div,
+            clk_out => clock
+        );
+
+    -- Instanciando o contador
+    C : contador
+        generic map (
+            N => 16
+        )
+        port map (
+            clk   => clock,
+            reset => reset,
+            max   => max,
+            y     => y_contador
+        );
+
+    -- Instanciando o comparador
+    Comp : comparador
+        port map (
+            A        => y_contador, 
+            B        => D,          
+            resultado => ypwm
+        );
+
+end behavior;

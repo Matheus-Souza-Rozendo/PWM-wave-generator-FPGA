@@ -1,0 +1,46 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity sistema is
+	port (
+		CLOCK_50                            : in  std_logic;
+		KEY                                 : in  std_logic_vector(3 downto 0);
+		EX_IO                               : out std_logic_vector(6 downto 0);
+		
+);
+end entity sistema;
+
+
+architecture behavior of sistema is
+
+component microcontrolador is
+	port (
+		clk_clk                             : in  std_logic                     := '0'; --                          clk.clk
+		pino_d_external_connection_export   : out std_logic_vector(15 downto 0);        --   pino_d_external_connection.export
+		pino_div_external_connection_export : out std_logic_vector(2 downto 0);         -- pino_div_external_connection.export
+		pino_max_external_connection_export : out std_logic_vector(15 downto 0);        -- pino_max_external_connection.export
+		reset_reset_n                       : in  std_logic                     := '0'  --                        reset.reset_n
+	);
+end component;
+
+component gerador_PWM is
+    port (
+        D      : in std_logic_vector(15 downto 0);  
+        max : in std_logic_vector(15 downto 0);  
+        clk_in,reset: in std_logic;
+        div:  in   std_logic_vector(2 downto 0);   
+        ypwm : out std_logic                   -- Resultado da comparação
+    );
+end component;
+
+ signal signal_D : std_logic_vector(15 downto 0);
+ signal signal_max : std_logic_vector(15 downto 0);
+ signal signal_div : std_logic_vector(2 downto 0);
+
+
+begin
+LO: microcontrolador port map (CLOCK_50,signal_D,signal_div,signal_max,KEY(0));
+PW: gerador_PWM port map (signal_D,signal_max,CLOCK_50,KEY(0),signal_div, EX_IO(0));
+
+end behavior

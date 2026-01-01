@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;NIOS2_trabalho&apos;" deleteContents="false" description="Delete resource &apos;NIOS2_trabalho&apos;" element1="/NIOS2_trabalho" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1751568771896"/>&#x0A;<refactoring comment="Delete resource &apos;NIOS2_trabalho_bsp&apos;" deleteContents="false" description="Delete resource &apos;NIOS2_trabalho_bsp&apos;" element1="/NIOS2_trabalho_bsp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1751568775649"/>
+</session>
